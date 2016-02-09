@@ -1,43 +1,79 @@
- .origin 0  
- .entrypoint BLINK
-  
-        MOV r1, 5
-  
 
-TOP: 
-  	QBBS HIGH, r31, 14  
-	QBBC LOW, r31, 14  
-	QBA TOP
+.setcallreg r29.w2
+.origin 0        
+.entrypoint START
 
+#include "sm.hp"
 
-HIGH:
-	SET r30, r30, 15 	
-	CLR r30, r30, 14
-	QBA TOP
-
-LOW:
-	CLR r30, r30, 15
-	SET r30, r30, 14
-	QBA TOP
+START:
+	MOV r1, 5
 
 
-    BLINK:
+STEP0:
+	clrgpio P9_27  
+	clrgpio P9_28
+	clrgpio P9_29
+	setgpio P9_30
+	CALL delay
 
-	 SET r30, r30, 15 
+STEP1:
+	clrgpio P9_27  
+	clrgpio P9_28
+	setgpio P9_29
+	setgpio P9_30
+	CALL delay
 
-         MOV r0, 0x00F00000
+STEP2:
+	clrgpio P9_27  
+	clrgpio P9_28
+	setgpio P9_29
+	clrgpio P9_30
+	CALL delay
 
-    DELAY:
+STEP3:
+	clrgpio P9_27  
+	setgpio P9_28
+	setgpio P9_29
+	clrgpio P9_30
+	CALL delay
+
+STEP4:
+	clrgpio P9_27  
+	setgpio P9_28
+	clrgpio P9_29
+	clrgpio P9_30
+	CALL delay
+
+STEP5:
+	setgpio P9_27  
+	setgpio P9_28
+	clrgpio P9_29
+	clrgpio P9_30
+	CALL delay
+
+STEP6:
+	setgpio P9_27  
+	clrgpio P9_28
+	clrgpio P9_29
+	clrgpio P9_30
+	CALL delay
+
+STEP7:
+	setgpio P9_27  
+	clrgpio P9_28
+	clrgpio P9_29
+	setgpio P9_30
+	CALL delay
+	JMP STEP0
+
+EXIT:
+	MOV r31.b0, 19 + 16  	
+	HALT  
+
+delay:
+	MOV r0, 0x00040000
+delay2:
         SUB r0, r0, 1
-        QBNE DELAY, r0, 0
-	CLR r30, r30, 15 
-        MOV r0, 0x00F00000
+        QBNE delay2, r0, 0
+        RET
 
-    DELAY2:
-        SUB r0, r0, 1
-        QBNE DELAY2, r0, 0
-        SUB r1, r1, 1
-        QBNE BLINK, r1, 0
-
- MOV r31.b0, 19 + 16  
- HALT  

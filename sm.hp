@@ -1,0 +1,25 @@
+#define P9_31 0
+#define P9_29 1
+#define P9_30 2
+#define P9_28 3
+#define P9_42 4
+#define P9_27 5
+#define P9_41 6
+#define P9_25 7
+#define P8_12 14
+#define P8_11 15
+
+
+.macro setgpio
+.mparam bit
+	SET r30, r30, bit
+.endm
+
+.macro clrgpio
+.mparam bit
+	CLR r30, r30, bit
+.endm
+
+
+
+

@@ -18,6 +18,18 @@ int main(int argc, char **argv)
         return 1;
     }
 
+	unsigned int SM_delay=10000;
+	unsigned int SM_steps=1000000;
+	unsigned int SM_direction=0;
+
+      unsigned int SM_control[3];
+	SM_control[0]=SM_delay;
+	SM_control[1]=SM_steps;
+	SM_control[2]=SM_direction;
+      prussdrv_pru_write_memory(PRUSS0_PRU0_DATARAM, 0,SM_control, 12);
+
+
+
     tpruss_intc_initdata pruss_intc_initdata = PRUSS_INTC_INITDATA;
     prussdrv_pruintc_init(&pruss_intc_initdata);
 
