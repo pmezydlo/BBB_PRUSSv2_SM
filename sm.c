@@ -1,26 +1,24 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <prussdrv.h>
 #include <pruss_intc_mapping.h>
 
-int main(int argc, char **argv)
+int main(int argc, char  **argv)
 {
 
-    if (argc != 2)
-    {
-        printf("Usage: %s sm.bin\n", argv[0]);
-        return 1;
-    }
+
 
     prussdrv_init();
+
     if (prussdrv_open(PRU_EVTOUT_0) == -1)
     {
         printf("prussdrv_open() failed\n");
         return 1;
     }
 
-	unsigned int SM_delay=10000;
-	unsigned int SM_steps=1000000;
-	unsigned int SM_direction=0;
+	unsigned int SM_delay=atoi(argv[4]);
+	unsigned int SM_steps=atoi(argv[3]);
+	unsigned int SM_direction=atoi(argv[2]);;
 
       unsigned int SM_control[3];
 	SM_control[0]=SM_delay;

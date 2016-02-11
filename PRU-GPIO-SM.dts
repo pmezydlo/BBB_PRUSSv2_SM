@@ -6,10 +6,7 @@
    compatible = "ti,beaglebone", "ti,beaglebone-green", "ti,beaglebone-black";  
    part-number = "PRU-GPIO-EXAMPLE";  
    version = "00A0";
-   /*
-   exclusive-use =  
-      "P8.11", "P8.12","P8.15","P8.16","P9.29","P9.42","pru0";  
-	*/   
+     
 
    fragment@0 {  
     target = <&am33xx_pinmux>;  
@@ -29,6 +26,8 @@
 		0x1AC 0x05  /* P9_25 out */
 		0x1B4 0x20  /* CLKOUT2 to input as per datasheet (to enable P9_41) */
 		0x164 0x20  /* GPIO0_7 to input as per datasheet (to enable P9_42) */
+		0x03C 0x26  /* P8_15 in */
+		0x038 0x26  /* P8_16 in */	 
        >;  
       };  
     };  
