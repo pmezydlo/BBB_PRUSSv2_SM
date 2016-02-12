@@ -21,7 +21,7 @@ cat /sys/devices/bone_capemgr.9/slots<br>
 make<br>
 
 6.Load sm.bin to PRU with sm:<br>
-./sm sm.bin <direction> <number of steps> <number of delay cycle>
+./sm sm.bin (direction) (number of steps) (number of delay cycle)
 
 for example
 ./sm sm.bin 0 1000 4000000
