@@ -20,6 +20,15 @@
 	CLR r30, r30, bit
 .endm
 
+.macro PUSH
+.mparam reg
+	ADD r13, r13, 4	
+	SBBO reg, r13, 0, 4	
+.endm
 
-
+.macro POP
+.mparam reg
+	LBBO reg, r13, 0, 4
+	SUB r13, r13, 4
+.endm
 

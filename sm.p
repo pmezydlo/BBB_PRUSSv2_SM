@@ -6,6 +6,7 @@
 #include "sm.hp"
 
 START:
+	MOV r13, 0x00000FA0
 	MOV r0, 0x00000000
 	LBBO r2, r0, 0, 4 /*counter for delay */
 	LBBO r3, r0, 4, 4 /*number of steps */
@@ -55,7 +56,6 @@ delay2:
         SUB r0, r0, 1
         QBNE delay2, r0, 0
         RET
-
 
 STEP0:
 	clrgpio P9_27  
