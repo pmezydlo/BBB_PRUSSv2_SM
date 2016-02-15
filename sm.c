@@ -2,6 +2,23 @@
 #include <stdlib.h>
 #include <prussdrv.h>
 #include <pruss_intc_mapping.h>
+#include <string.h>
+#include <errno.h>
+#include <signal.h>
+#include <fcntl.h>
+#include <ctype.h>
+#include <termios.h>
+#include <sys/types.h>
+#include <sys/mman.h>
+
+unsigned int readFileValue(char filename[]){
+   FILE* fp;
+   unsigned int value = 0;
+   fp = fopen(filename, "rt");
+   fscanf(fp, "%x", &value);
+   fclose(fp);
+   return value;
+}
 
 int main(int argc, char  **argv)
 {
@@ -24,6 +41,7 @@ int main(int argc, char  **argv)
 	SM_control[0]=SM_delay;
 	SM_control[1]=SM_steps;
 	SM_control[2]=SM_direction;
+
       prussdrv_pru_write_memory(PRUSS0_PRU0_DATARAM, 0,SM_control, 12);
 
 

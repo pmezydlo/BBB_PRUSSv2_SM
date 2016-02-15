@@ -1,34 +1,65 @@
-#define P9_31 0
-#define P9_29 1
-#define P9_30 2
-#define P9_28 3
-#define P9_42 4
-#define P9_27 5
-#define P9_41 6
-#define P9_25 7
-#define P8_12 14
-#define P8_11 15
+#define PRU_0
+
+#define GPIO_out r30 /*GPIO register output   */
+#define GPIO_in r31 /*GPIO register input */
+#define STACK_reg r13 /* Stack pointer (addres)*/
+#define STACK_addres  0x00000FA0 /*Stack memory adress */
+#define CALL_reg r29.w2
+
+#ifdef PRU_0
+	#define P9_31 0
+	#define P9_29 1
+	#define P9_30 2	
+	#define P9_28 3
+	#define P9_42 4
+	#define P9_27 5
+	#define P9_41 6
+	#define P9_25 7
+	#define P8_12 14
+	#define P8_11 15
+	#define P8_16 14
+	#define P8_15 15
+	#define P9_24 16
+#endif
+
+#ifdef PRU_1
+	#define P8_45 0
+	#define P8_46 1
+	#define P8_43 2
+	#define P8_44 3
+	#define P8_41 4
+	#define P8_42 5
+	#define P8_39 6
+	#define P8_40 7
+	#define P8_27 8
+	#define P8_29 9
+	#define P8_28 10
+	#define P8_30 11
+	#define P8_21 12
+	#define P8_20 13
+	#define P9_26 16
+#endif
 
 
 .macro setgpio
 .mparam bit
-	SET r30, r30, bit
+	SET GPIO_out, GPIO_out, bit
 .endm
 
 .macro clrgpio
 .mparam bit
-	CLR r30, r30, bit
+	CLR GPIO_out, GPIO_out, bit
 .endm
 
 .macro PUSH
 .mparam reg
-	ADD r13, r13, 4	
-	SBBO reg, r13, 0, 4	
+	ADD STACK_reg, STACK_reg, 4	
+	SBBO reg, STACK_ref, 0, 4	
 .endm
 
 .macro POP
 .mparam reg
-	LBBO reg, r13, 0, 4
-	SUB r13, r13, 4
+	LBBO reg, STACK_reg, 0, 4
+	SUB STACK_reg, STACK_reg, 4
 .endm
 

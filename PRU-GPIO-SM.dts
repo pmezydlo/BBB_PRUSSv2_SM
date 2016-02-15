@@ -3,8 +3,8 @@
  
  / {  
 
-   compatible = "ti,beaglebone", "ti,beaglebone-green", "ti,beaglebone-black";  
-   part-number = "PRU-GPIO-EXAMPLE";  
+   compatible = "ti,beaglebone", "ti,beaglebone-black";  
+   part-number = "PRU-GPIO-SM";  
    version = "00A0";
      
 

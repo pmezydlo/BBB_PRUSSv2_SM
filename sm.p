@@ -1,12 +1,12 @@
+#include "sm.hp"
 
-.setcallreg r29.w2
+.setcallreg CALL_reg
 .origin 0        
 .entrypoint START
 
-#include "sm.hp"
-
 START:
-	MOV r13, 0x00000FA0
+	MOV STACK_reg, STACK_addres
+	
 	MOV r0, 0x00000000
 	LBBO r2, r0, 0, 4 /*counter for delay */
 	LBBO r3, r0, 4, 4 /*number of steps */
@@ -14,7 +14,7 @@ START:
 	MOV r1, 0x00000000	
 
 MAIN:
-	QBBS EXIT, r31, 15
+	QBBS EXIT, GPIO_in, P8_15
 	
 	SUB r3, r3, 1
 	QBEQ EXIT, r3, 0
